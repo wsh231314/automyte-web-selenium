@@ -1,0 +1,8 @@
+<ehcache name="spring_boot_auto_ehcache">
+	<diskStore path="java.io.tmpdir" />
+
+	<cache name="ProductInfoService" maxElementsInMemory="10"
+	    timeToIdleSeconds = "1200"
+	    timeToLiveSeconds = "600"
+		eternal="false" overflowToDisk="false" />
+</ehcache>

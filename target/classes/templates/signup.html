@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<!-- import html layout/header.html -->
+<head>
+<title>AutoMyte Admin</title>
+<meta name="ctx" th:content="${#httpServletRequest.getContextPath()}" />
+<link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}" />
+</head>
+
+<body>
+	<div id="wrapper">
+		<nav class="navbar navbar-default navbar-static-top" role="navigation"
+			style="margin-bottom: 0">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-collapse">
+					<span class="sr-only"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" th:href="@{/}">Sign Up 画面</a>
+			</div>
+		</nav>
+	</div>
+
+	<div class="container">
+		<div class="starter-template">
+			<!-- 1 -->
+			<p th:if="${MSG}" class="bg-warning">当該ユーザIDのユーザ存在ありません.</p>
+			<h2>Sign Up</h2>
+			<form name="form" th:action="@{/user/insert}" action="/user/insert"
+				method="POST" th:object="${loginForm}">
+				<!-- 3 -->
+				<div class="form-group">
+					<input type="text" class="form-control" name="eid" th:value="*{eid}"
+						id="eid" placeholder="ユーザID" />
+					<p style="color:red;font-size: large;" th:if="${#fields.hasErrors('eid')}" th:errors="*{eid}"></p>
+				</div>
+				<div class="form-group">
+					<input type="text" class="form-control" name="username" th:value="*{username}"
+						id="username" placeholder="ユーザ" />
+				</div>
+				<div class="form-group">
+					<input type="password" class="form-control" name="password" th:value="*{password}"
+						id="password" placeholder="パスワード" />
+					<p style="color:red;font-size: large;" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+				</div>
+				<div class="form-group">
+					<input type="password" class="form-control" name="passwordConfrim" th:value="*{passwordConfrim}"
+						id="passwordConfrim" placeholder="パスワード確認" />
+					<p style="color:red;font-size: large;" th:if="${#fields.hasErrors('passwordConfrim')}" th:errors="*{passwordConfrim}"></p>
+				</div>
+				<input type="submit" id="singup" value="Sign Up"
+					class="btn btn-primary" th:formaction="@{/user/insert}" /> 
+				<input type="submit" id="reset"
+					value="Re Set" class="btn btn-primary" th:formaction="@{/user/update}" />
+			</form>
+		</div>
+	</div>
+</body>
+</html>

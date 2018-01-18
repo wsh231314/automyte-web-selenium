@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<!-- import html layout/header.html -->
+<head th:replace="layout/header :: head"></head>
+
+<body>
+	<div id="wrapper">
+		<nav th:replace="layout/menu :: nav"></nav>
+
+		<div id="page-wrapper">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1 class="page-header">Price Compare</h1>
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
+			<div class="row">
+				<br />
+				<div class="col-lg-10"></div>
+				<div class="col-lg-2">
+					<!-- 					<a th:href="@{/download?#{pno}}"><input type="button" value="Excel Download" style="margin-bottom:20px" onclick="download()"/></a> -->
+				</div>
+				<br />
+				<!-- /.col-lg-12 -->
+			</div>
+			<!-- /.row -->
+			<div class="row">
+				<div class="col-lg-12">
+					<!-- /.panel -->
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							Receipt Detail
+							<div class="pull-right"></div>
+						</div>
+						<!-- /.panel-heading -->
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-lg-4">
+									<div class="imageDiv">
+										<img src="" alt="" id="receiptImage"
+											class="divImage" />
+									</div>
+									<!-- /.table-responsive -->
+								</div>
+								<!-- /.col-lg-4 (nested) -->
+								<div class="col-lg-8">
+									<form>
+										<div class="form-group">
+											<span id="messageInfo" style="color: blue;"></span>
+											<span id="messageError" style="color: red;"></span>
+										</div>
+										<div class="form-group">
+											<label for="category_id">Expense Type</label> 
+										    <select class="form-control" id="category_id">
+											  <option value="1">Taxi</option>
+											  <option value="2">MealsEntertainment</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label for="date">Date</label> 
+											<input type="text" class="form-control datepicker date"	id="receiptDate" />
+										</div>
+										<div class="form-group">
+											<label for="amount">Amount</label> 
+											<input type="number" id="amount" class="form-control"/>
+										</div>
+										<div class="form-group">
+											<label for="name">Name</label>
+											<input type="text" id="receiptName" class="form-control"/>
+										</div>
+										<button type="button" class="btn btn-primary" id="updateReceipt">update</button>
+										<button type="button" class="btn btn-primary" id="cancelReceipt">cancel</button>
+									</form>
+								</div>
+								<!-- /.col-lg-8 (nested) -->
+							</div>
+							<!-- /.row -->
+						</div>
+						<!-- /.panel-body -->
+					</div>
+				</div>
+				<!-- /.col-lg-8 -->
+				<!-- /.col-lg-4 -->
+			</div>
+			<!-- /.row -->
+		</div>
+		<!-- /#page-wrapper -->
+	</div>
+
+	<!-- import html layout/footer.html -->
+	<div th:include="layout/footer :: footer"></div>
+	<script type="text/javascript" th:src="@{/jquery/jquery-ui.min.js}"></script>
+	<script type="text/javascript" th:src="@{/jquery/jquery-dateFormat.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/datepicker.js}"></script>
+	<script type="text/javascript" th:src="@{/js/detail.js}"></script>
+	<input type="hidden" th:value="${id}" id="rid" />
+</body>
+</html>

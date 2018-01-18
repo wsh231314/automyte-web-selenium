@@ -1,0 +1,122 @@
+\\-- local mysql start
+-- mysqld --defaults-file=C:\lichunhui\mysql-5.6.36-winx64\my.ini --console
+-- create database myte;
+-- use myte;
+Drop table `receipt_info`;
+CREATE TABLE `receipt_info` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`category_id` VARCHAR(1) NOT NULL COLLATE 'utf8_general_ci',
+	`amount` VARCHAR(10) NOT NULL COLLATE 'utf8_general_ci',
+	`date` VARCHAR(10) NOT NULL ,
+	`name` VARCHAR(255) NOT NULL COLLATE 'utf8_general_ci',
+	`eid` VARCHAR(30) NOT NULL COLLATE 'utf8_general_ci',
+	`image_name` VARCHAR(255) COLLATE 'utf8_general_ci',
+	`image_url` VARCHAR(255) COLLATE 'utf8_general_ci',
+	`status` VARCHAR(255) COLLATE 'utf8_general_ci',
+	`location` VARCHAR(10) COLLATE 'utf8_general_ci',
+	`submit_date` VARCHAR(10) NOT NULL ,
+	`create_by` VARCHAR(10) NOT NULL DEFAULT '-1' COLLATE 'utf8_general_ci',
+	`create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`id`)
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+create index index_submit_date on receipt_info(submit_date);
+
+Drop table `category`;
+CREATE TABLE `category` (
+  `category_id` VARCHAR(1) NOT NULL,
+  `category_name` VARCHAR(250) NOT NULL,
+  PRIMARY KEY (`category_id`));
+
+
+insert into `category` values ('1', 'Taxi')
+;
+insert into `category` values ('2', 'MealsEntertainment')
+;
+
+---------------------------------------------------------------------------------------
+-- user and role table
+---------------------------------------------------------------------------------------
+
+Drop table `user`;
+CREATE TABLE `user` (
+    `eid` VARCHAR(10) NOT NULL COLLATE 'utf8_general_ci',
+	`ename` VARCHAR(255) COLLATE 'utf8_general_ci',
+	`password` VARCHAR(50) NOT NULL COLLATE 'utf8_general_ci',
+	PRIMARY KEY (`eid`)
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+insert into user (eid, ename, password) values ('10875177', 'chunhui.li', 'admin');
+insert into user (eid, ename, password) values ('10875188', 'chunhai.li', 'user');
+
+Drop table `role`;
+CREATE TABLE `role` (
+    `rid` INT(11) NOT NULL AUTO_INCREMENT,
+	`rname` VARCHAR(255) COLLATE 'utf8_general_ci',
+	PRIMARY KEY (`rid`)
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+insert into role(rid,rname) values(1,'ROLE_ADMIN');
+insert into role(rid,rname) values(2,'ROLE_USER');
+
+Drop table `role_user`;
+CREATE TABLE `role_user` (
+    `ruid` INT(11) NOT NULL AUTO_INCREMENT,
+	`eid` VARCHAR(10) NOT NULL COLLATE 'utf8_general_ci',
+	`rid` VARCHAR(10) NOT NULL COLLATE 'utf8_general_ci',
+	PRIMARY KEY (`ruid`)
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+insert into role_user(eid,rid) values('10875177',1);
+insert into role_user(eid,rid) values('10875188',2);
+
+
+Drop table `permission`;
+CREATE TABLE `permission` (
+    `pid` INT(11) NOT NULL AUTO_INCREMENT,
+	`pname` VARCHAR(25) COLLATE 'utf8_general_ci',
+	`description` VARCHAR(255) COLLATE 'utf8_general_ci',
+	`url` VARCHAR(255) COLLATE 'utf8_general_ci',
+	`method` VARCHAR(255) COLLATE 'utf8_general_ci',
+	PRIMARY KEY (`pid`)
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+insert into permission(pname,description,url,method) values('ROLE_USER', 'home', '/', 'home');
+insert into permission(pname,description,url,method) values('ROLE_USER', 'list', '/list', 'list');
+insert into permission(pname,description,url,method) values('ROLE_USER', 'detail', '/detail', 'detail');
+insert into permission(pname,description,url,method) values('ROLE_USER', 'upload', '/uploadfile', 'upload');
+insert into permission(pname,description,url,method) values('ROLE_ADMIN', 'admin', '/admin', 'admin');
+
+
+Drop table `permission_role`;
+CREATE TABLE `permission_role` (
+    `prid` INT(11) NOT NULL AUTO_INCREMENT,
+	`pid` VARCHAR(10) NOT NULL COLLATE 'utf8_general_ci',
+	`rid` VARCHAR(10) NOT NULL COLLATE 'utf8_general_ci',
+	PRIMARY KEY (`prid`)
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+insert into permission_role(pid,rid) values(1,1);
+insert into permission_role(pid,rid) values(2,1);
+insert into permission_role(pid,rid) values(3,1);
+insert into permission_role(pid,rid) values(4,1);
+insert into permission_role(pid,rid) values(5,1);
+
+insert into permission_role(pid,rid) values(1,2);
+insert into permission_role(pid,rid) values(2,2);
+insert into permission_role(pid,rid) values(3,2);
+insert into permission_role(pid,rid) values(4,2);
+

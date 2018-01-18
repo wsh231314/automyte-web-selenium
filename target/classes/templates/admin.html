@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<!-- import html layout/header.html -->
+<head>
+		<title>AutoMyte Admin</title>
+		<meta name="ctx" th:content="${#httpServletRequest.getContextPath()}" />
+        <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}" />
+</head>
+
+<body>
+	<div id="wrapper">
+		<nav class="navbar navbar-default navbar-static-top" role="navigation"
+			style="margin-bottom: 0">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-collapse">
+					<span class="sr-only"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" th:href="@{/}">ADDDDDDDDDDDDDDDDDDDDDDDD</a>
+			</div>
+		</nav>
+	</div>
+
+	<div class="container">
+		<div class="starter-template">
+			<p th:if="${param.logout}" class="bg-warning">Logout!!</p>
+			<!-- 1 -->
+			<p th:if="${param.error}" class="bg-danger">ユーザあるいはパスワードが間違い、再Loginください。</p>
+			<!-- 2 -->
+			<h2>Login</h2>
+			<form name="form" th:action="@{/login}" action="/login" method="POST">
+				<!-- 3 -->
+				<div class="form-group">
+					<input type="text" class="form-control" name="username" value=""
+						placeholder="账号" />
+				</div>
+				<div class="form-group">
+					<input type="password" class="form-control" name="password"
+						placeholder="密码" />
+				</div>
+				<input type="submit" id="login" value="Login"
+					class="btn btn-primary" />
+			</form>
+		</div>
+	</div>
+</body>
+</html>
