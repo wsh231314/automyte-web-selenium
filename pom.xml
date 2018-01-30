@@ -2,10 +2,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>auto.myte</groupId>
-	<artifactId>auto-web-selenium</artifactId>
+	<artifactId>auto-web</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<name>auto-web-selenium</name>
-	<packaging>war</packaging>
+	<name>auto-web</name>
+	<packaging>jar</packaging>
 
 
 	<parent>
@@ -148,8 +148,8 @@
 			<artifactId>fastjson</artifactId>
 			<version>1.1.15</version>
 		</dependency>
-		
-				<!-- swagger2 -->
+
+		<!-- swagger2 -->
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
@@ -160,25 +160,14 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>2.2.2</version>
 		</dependency>
-		
-		<!-- add by wang shaohua end -->
-<dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-tomcat</artifactId>
-        <scope>provided</scope>
-    </dependency> 
-		
 	</dependencies>
 
 	<build>
-		<finalName>myte</finalName>
+		<finalName>automyte</finalName>
 		<plugins>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<configuration>
-					<warName>myte</warName>
-				</configuration>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>

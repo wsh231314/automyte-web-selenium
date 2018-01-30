@@ -10,6 +10,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -156,6 +157,21 @@ public class RestFulController {
 		int flg = service.deleteByPrimaryKey(id);
 		map.put("flg", Integer.valueOf(flg));
 		return map;
+	}
+	
+	@RequestMapping("/deleteByIds")
+	public Map<String, String> deleteByIds(@RequestParam(value = "ids", required = false) String ids) {
+		Map<String, String> result = new HashMap<String, String>();
+		
+		List<String> idList = Arrays.asList(ids.split(","));
+		
+		for (String id : idList) {
+			service.deleteByPrimaryKey(id);
+		}
+		
+		result.put("message", "delete has successed!");
+		
+		return result;
 	}
 
 	/**

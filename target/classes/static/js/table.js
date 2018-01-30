@@ -135,10 +135,64 @@ if (id) {
 }
 }
 
+function deleteBySelect() {
+	var dataList = $("input[name=delete_check]");
+	
+	var selectId = "";
+	
+	$("input[name=delete_check]").each(function (index, item) {
+		if (item.checked) {
+			if (selectId.length > 0) {
+				selectId = selectId + "," + item.value;
+			} else {
+				selectId = item.value;
+			}
+		}
+		
+	});
+	
+	if (selectId.length <= 0) {
+		alert("no item has been selected!");
+		return;
+	}
+	
+	var url= $("#ctx").val() + "/deleteByIds?ids=" + selectId;
+	
+	$.ajax({
+		type : "POST",
+		url : url,
+        contentType: "application/json; charset=utf-8",
+		dataType : "json",
+		success : function(data) {
+			alert(data.message);
+			$("#example").dataTable().fnDestroy();
+			var url = $("#ctx").val() + "/search?submitDate=" + $("#submitDate").val();
+			loadTableDate(url);
+			 $('#example').DataTable().ajax.reload(function(data){
+			       console.debug(data);
+			   });
+		},
+		error : function (XMLHttpRequest, textStatus, errorThrown) {
+			console.log(errorThrown);
+		}
+	});
+	
+	
+}
+
+function selectDeleteItem () {
+	var selected = $("#delete_check_all").prop("checked");
+	
+	$("input[name='delete_check']").each(function(index, item) {
+		item.checked = selected
+	});
+}
+
 function loadTableDate(url) {
 	$('#example').DataTable({
 		"ajax" : url,
 		"pagingType": "simple_numbers",//设置分页控件的模式 
+		"searching": false,
 		"iDisplayLength" : 10,// 每页显示行数
 		"bLengthChange": false,//屏蔽tables的一页展示多少条记录的下拉列表
 //		"bFilter" : true,// 搜索栏
@@ -151,8 +205,15 @@ function loadTableDate(url) {
 //        },
 		"columns" : [ {
 			"data" : "id"
-		},
-		{
+		},{
+			"sClass": "text-center",
+			"data": "id",
+			"render": function (data, type, full, meta) {
+                return '<input type="checkbox" name = "delete_check" value="' + data + '"/>';
+            },
+            "bSortable": false,
+			"searchable" : false
+		}, {
 			"data" : "category_name"
 		}, {
 			"data" : "date"

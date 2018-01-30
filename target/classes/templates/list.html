@@ -37,8 +37,8 @@
 									<label for="date">Files</label> 
 									<input type="file" name="myFile"  multiple="multiple" id="multipleFiles" />
 								</div>
-								<input type="submit" name="uploadmulti" value="upload" id="uploadmulti"/>
-								<input type="button" name="searchList" value="search List" id="searchList" />
+								<input type="submit" name="uploadmulti" value="Upload" class="btn btn-primary"  id="uploadmulti"/>
+								<input type="button" name="searchList" value="Search List"  class="btn btn-primary" id="searchList" />
 							</form>
 						</div>
 					</div>
@@ -51,8 +51,11 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">Receipt Info List.
-						<span style="position: absolute;right: 200px;"><input type="button" value="Receipt Download" onclick="downloadExcel()"/></span>
+						<div class="panel-heading">
+						<input type="button" value="Delete" class="btn btn-primary" onclick="deleteBySelect()"/>
+						<input type="button" value="Receipt Download" class="btn btn-primary" onclick="downloadExcel()"/>
+						<br/>
+						Receipt Info List.
 						</div>
 						<!-- /.panel-heading -->
 						<div class="panel-body">
@@ -61,6 +64,7 @@
 								<thead>
 									<tr>
 										<th>ID</th>
+										<th>削除<br/><input type="checkbox" id = "delete_check_all" onclick="selectDeleteItem()"/></th>
 										<th>Expense Type</th>
 										<th>Date</th>
 										<th>Amount</th>
